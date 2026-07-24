@@ -21,7 +21,7 @@ def setup_playwright():
     })
     return pw, context, page
 
-def wait_for_setup(page):
+def wait_for_setup(page, limit_year):
     print("\n====================================================")
     print("  INSTRUCCIONES DE PREPARACIÓN (LEER CON CUIDADO)   ")
     print("====================================================")
@@ -30,7 +30,7 @@ def wait_for_setup(page):
     print("   El script intentará navegar automáticamente a: https://www.facebook.com/me/allactivity")
     print("3. Una vez allí, aplica los filtros manualmente:")
     print("   - Haz clic en 'Filtros' (Filters).")
-    print("   - Selecciona el año '2015' y anteriores.")
+    print(f"   - Selecciona el año '{limit_year}' y anteriores.")
     print("   - Selecciona la categoría 'Tus publicaciones' (o la que desees borrar).")
     print("4. Asegúrate de tener la lista de publicaciones en pantalla.")
     print("5. Regresa a esta terminal y presiona ENTER para iniciar la eliminación.")
@@ -122,15 +122,19 @@ def main():
     print("  Facebook Activity Log Deleter (Playwright)        ")
     print("====================================================")
     
+    limit_year = input("Introduce el año límite (ej: 2015) para borrar publicaciones de ese año y anteriores: ").strip()
+    if not limit_year:
+        limit_year = "2015"
+        
     pw, context, page = setup_playwright()
     
     try:
-        wait_for_setup(page)
+        wait_for_setup(page, limit_year)
         
         deleted_count = 0
         consecutive_failures = 0
         
-        print("\nIniciando proceso de eliminación automática...")
+        print(f"\nIniciando proceso de eliminación automática para posts del {limit_year} y anteriores...")
         
         while True:
             buttons = find_action_menu_buttons(page)

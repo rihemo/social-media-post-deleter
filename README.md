@@ -10,16 +10,16 @@ Este repositorio contiene dos scripts automatizados desarrollados en Python util
 ## Características
 
 1. **Delete Old Tweets (X.com):**
+   - Te solicita tu nombre de usuario y la fecha límite que elijas.
    - Navega directamente a tu perfil de X.
-   - Lee el año exacto de cada tweet.
-   - Si es del año 2016 en adelante, lo omite para proteger tus tweets recientes.
-   - Si es del **2015 o más antiguo**, lo elimina automáticamente simulando clics reales.
+   - Compara las fechas de cada publicación.
+   - Si la publicación es del día o fecha límite indicada y anteriores, la elimina automáticamente. Si es posterior, la conserva intacta.
    - Guarda tu sesión localmente para que no tengas que iniciar sesión cada vez.
 
 2. **Delete Facebook Posts (Facebook):**
-   - Te permite iniciar sesión manualmente.
-   - Te dirige al **Registro de Actividad** de tu cuenta.
-   - Tú aplicas el filtro de fecha (ej. 2015 y anteriores) y categoría.
+   - Te solicita el año límite que deseas eliminar.
+   - Abre el navegador para que inicies sesión manualmente.
+   - Te dirige al **Registro de Actividad** de tu cuenta y te recuerda configurar los filtros manualmente para ese año y anteriores.
    - Presionas ENTER en la consola y el script elimina o envía a la papelera todos los posts visibles de esa lista de forma secuencial.
 
 ---
@@ -42,20 +42,23 @@ Asegúrate de tener instalado Python en tu sistema.
 
 ## Instrucciones de Uso
 
-### 1. Eliminar Tweets de X (2015 hacia atrás)
+### 1. Eliminar Tweets de X
 Ejecuta el script:
 ```bash
 python delete_old_tweets.py
 ```
-- Se abrirá un navegador Chromium. Si no has iniciado sesión, el script te guiará para que lo hagas manualmente.
-- Una vez iniciada la sesión, presiona ENTER en la terminal. El script irá a tu perfil y borrará automáticamente los posts anteriores a 2016.
+- Introduce tu nombre de usuario (sin @) y la fecha límite en formato `AAAA-MM-DD` (por ejemplo, `2015-12-31` borrará todo lo publicado en esa fecha y antes de ella).
+- Se abrirá un navegador Chromium. Si no has iniciado sesión, hazlo de forma manual en la ventana.
+- Una vez iniciada la sesión y estando en el inicio (Home), regresa a la terminal y presiona ENTER. El script irá a tu perfil y borrará automáticamente los posts que cumplan con el filtro de fecha establecido.
 
 ### 2. Eliminar Publicaciones de Facebook
 Ejecuta el script:
 ```bash
 python delete_fb_posts.py
 ```
+- Introduce el año límite que desees eliminar (por ejemplo, `2015`).
 - Se abrirá un navegador Chromium. Inicia sesión en tu cuenta de Facebook.
-- Ve a tu **Registro de actividad** (`https://www.facebook.com/me/allactivity`).
-- Filtra por el año (ej. 2015) y la categoría deseada de publicaciones.
-- Vuelve a la terminal y presiona ENTER para iniciar la eliminación automática.
+- Ve al **Registro de actividad** (`https://www.facebook.com/me/allactivity`).
+- Filtra por el año introducido (o el que prefieras) y la categoría deseada de publicaciones.
+- Vuelve a la terminal y presiona ENTER para iniciar la eliminación automática de todo lo que esté en pantalla.
+
